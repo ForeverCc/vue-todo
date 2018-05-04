@@ -1,8 +1,8 @@
 <template>
     <div class="operation">
-        <span class="left">2 items left</span>
+        <span class="left">{{undo}} items left</span>
         <span class="tabs">
-            <span v-for="state in states" :key="state" :class="[filter === state?'actived':'']">
+            <span v-for="state in states" :key="state" @click="changeState(state)" :class="[filter === state?'actived':'']">
                 {{state}}
             </span>
         </span>
@@ -16,6 +16,9 @@ export default {
         filter: {
             type: String,
             dafault: 'all'
+        },
+        todos: {
+            type:Array
         }
     },
     data() {
@@ -23,9 +26,17 @@ export default {
             states: ['all','active','completed']
         }
     },
+    computed:{
+        undo(){
+            return this.todos.filter((item)=> !item.completed).length
+        }
+    },
     methods: {
         clearAll(){
-
+            this.$emit('clear')
+        },
+        changeState(state){
+            this.$emit('changeStatus',state)
         }
     }
 }

@@ -1,8 +1,8 @@
 <template>
     <section class="main">
         <input type="text" class="add-input" autofocus="autofocus" placeholder="what want to do next" @keyup.enter="addTodo" />
-        <todo-item v-for="todo in todos" :todo="todo" :key="todo.id" ></todo-item>
-        <tab :filter="filter"></tab>
+        <todo-item v-for="todo in filterTodos" :todo="todo" :key="todo.id" @del="delItem" ></todo-item>
+        <tab :filter="filter" :todos="todos" @changeStatus="changeState" @clear="clearAll"></tab>
     </section>
 </template>
 
@@ -21,7 +21,17 @@ export default {
         TodoItem,
         Tab
     },
+    computed: {
+        filterTodos(){
+            if(this.filter === 'all'){
+                return this.todos;
+            }
+            let completed = this.filter === 'completed';           
+            return this.todos.filter((item) =>{return item.completed === completed})
+        }
+    },
     methods: {
+        //添加todoItem
         addTodo(e){
             this.todos.unshift({
                 id: id ++ ,
@@ -29,6 +39,18 @@ export default {
                 completed: false
             })
             e.target.value ='';
+        },
+        //删除todoItem
+        delItem(id) {
+            this.todos.splice(this.todos.findIndex((item)=>item.id === id),1)
+        },
+        //改变筛选状态，接受子组件传过来的参数
+        changeState(state) {
+            this.filter = state
+        },
+        //清空todos
+        clearAll(){
+            this.todos = []
         }
     }
 }

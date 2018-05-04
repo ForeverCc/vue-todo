@@ -15,8 +15,10 @@ export default {
         }
     },
     methods: {
+        //点击删除该项，子组件向父组件传值
+        
         deleteTodoItem(){
-
+            this.$emit('del',this.todo.id)
         }
     }
 }
@@ -29,7 +31,7 @@ export default {
     font-size 24px
     border-bottom 1px solid rgba(0, 0, 0, 0.06)
     &:hover {
-        .destory:after {
+        .delete:after {
             content: '×'
         }
     }
