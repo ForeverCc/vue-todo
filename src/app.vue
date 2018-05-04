@@ -1,20 +1,21 @@
 <template>
-    <div id="app">{{ initMessage }}</div>
+    <div class="app">{{ initMessage }}</div>
 </template>
 
 <script>
 export default {
-    data(){
+    data() {
         return {
-            initMessage: '项目初始化'
-        }
+            initMessage: "项目初始化"
+        };
     }
-}
+};
 </script>
 
-<style>
-#app {
+<style lang="stylus" scoped>
+.app {
     text-align: center;
-    color: red;
+    font-size : 20px
 }
 </style>
+
