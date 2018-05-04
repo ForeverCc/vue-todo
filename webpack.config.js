@@ -51,15 +51,7 @@ const config = {
             }
         ]
     },
-    // devServer: {
-    //     port: 8080, 
-    //     host: '0.0.0.0',
-    //     overlay: {
-    //         errors: true  //编译的错误显示到网页
-    //     },
-    //     hot: true
-    // },
-
+    
     plugins: [
 
         new webpack.DefinePlugin({
@@ -70,9 +62,7 @@ const config = {
 
         new HtmlWebpackPlugin({
             template: './index.html'
-        }),
-        // new webpack.HotModuleReplacementPlugin(),
-        // new webpack.NoEmitOnErrorsPlugin()
+        })
 
     ]
 }
